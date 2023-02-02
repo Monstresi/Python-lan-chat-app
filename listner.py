@@ -14,9 +14,11 @@ s.close()
 
 #host = "192.168.1.11"
 print(f"Host is {host}")
-port = 12345
+port = 8787
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
 s.bind((host, port))
 
 s.listen(5)
@@ -32,20 +34,22 @@ c.send(b"Connected to the listener")
 # Send encryption public keyc.send(public_key.save_pkcs1())
 #print(f"Sent: {public_key.save_pkcs1()}")
 c.send(public_key.save_pkcs1())
-l_pub_key = c.recv(1024)
-#print(l_pub_key)
+other_pub_key = c.recv(1024)
+other_pub_key = rsa.PublicKey.load_pkcs1(other_pub_key)
 
 while True:
     message = c.recv(1024)
+    plaintext = rsa.decrypt(message, private_key)
     if not message:
         break
 
     #print(f"Received message: {message.decode()}")
-    print(f"\u001b[34mReceived message: {message.decode()}")
+    print(f"\u001b[34mReceived message: {plaintext.decode()}")
+    if plaintext.decode() == "exit": break
 
-    if message.decode() == "exit":
-        break
     message = input("\u001b[0mEnter message to send: ")
+    if message == "exit": break
+    #ciphertext = rsa.encrypt(message, other_pub_key)
     c.send(message.encode())
 
 c.close()
