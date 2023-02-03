@@ -31,10 +31,10 @@ while True:
     if message == "exit":
         break
     message = s.recv(1024)
-    #plaintext = rsa.decrypt(message, private_key)
+    plaintext = rsa.decrypt(message, private_key)
     if not message:
         break
-    print(f"\u001b[34mReceived message: {message.decode()}")
-    if message.decode() == "exit": break
+    print(f"\u001b[34mReceived message: {plaintext.decode()}")
+    if plaintext.decode() == "exit": break
 
 s.close()

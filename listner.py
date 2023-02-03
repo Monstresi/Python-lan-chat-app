@@ -49,7 +49,7 @@ while True:
 
     message = input("\u001b[0mEnter message to send: ")
     if message == "exit": break
-    #ciphertext = rsa.encrypt(message, other_pub_key)
-    c.send(message.encode())
+    ciphertext = rsa.encrypt(message.encode(), other_pub_key)
+    c.send(ciphertext)
 
 c.close()
