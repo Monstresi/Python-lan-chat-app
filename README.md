@@ -8,5 +8,7 @@ Command-Line Interface: The application runs in the command-line interface, prov
 
 Message Encryption: Security is a top priority. The app encrypts messages to ensure that your conversations remain private and secure within the local network.
 
+Ensure that the firewall on the listener device allows for connection to the port (8787 by default)
 ##Dependencies
 pip3 install rsa
+
