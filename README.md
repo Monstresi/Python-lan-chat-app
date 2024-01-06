@@ -7,3 +7,6 @@ Local Network Communication: The app allows users to chat with each other within
 Command-Line Interface: The application runs in the command-line interface, providing a lightweight and efficient way to communicate without the need for a graphical user interface.
 
 Message Encryption: Security is a top priority. The app encrypts messages to ensure that your conversations remain private and secure within the local network.
+
+##Dependencies
+pip3 install rsa
